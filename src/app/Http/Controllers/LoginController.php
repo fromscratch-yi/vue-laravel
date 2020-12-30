@@ -37,7 +37,7 @@ class LoginController extends Controller
         }
 
         // tokenの作成
-        $token = $user->createToken($request->device_name)->plainTextToken;
+        $token = $user->createToken($request->email)->plainTextToken;
 
         return response()->json(['token' => $token, 'user' => $user], 200);
     }
@@ -55,8 +55,7 @@ class LoginController extends Controller
         // オーバーライドして、デバイス名を必須化しています
         $request->validate([
             $this->username() => 'required|string',
-            'password' => 'required|string',
-            'device_name' => 'required'
+            'password' => 'required|string'
         ]);
     }
 

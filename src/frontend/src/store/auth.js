@@ -54,10 +54,11 @@ const actions = {
     })
   },
   fetchUser (context) {
-    axios.get(BASE_URL + '/api/user', null, {
+    axios.get(BASE_URL + '/api/user', {
       headers: {
         Authorization: `Bearer ${state.token}`
-      }
+      },
+      data: {}
     }).then((result) => {
       context.commit('setUser', result.data.user)
     }).catch(error => {
