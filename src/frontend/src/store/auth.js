@@ -44,7 +44,8 @@ const actions = {
     axios.post(BASE_URL + '/api/logout', null, {
       headers: {
         Authorization: `Bearer ${state.token}`
-      }
+      },
+      data: {}
     }).then((result) => {
       console.log(result)
       context.commit('setUser', null)
