@@ -7,10 +7,11 @@ docker-compose build --no-cache --force-rm && \
 docker-compose up -d && \
 docker-compose exec php composer self-update && \
 docker-compose exec php composer install && \
-docker-compose exec php php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider" && \
 docker-compose exec php php artisan key:generate && \
 docker-compose exec php php artisan migrate:refresh && \
-docker-compose exec node npm install
+docker-compose exec node npm install && \
+docker-compose exec php php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider" && \
+docker-compose exec php php artisan migrate:refresh
 ```
 
 ### start
