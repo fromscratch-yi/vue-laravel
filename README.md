@@ -1,6 +1,7 @@
 ### build
 Copy all this command and exec on terminal
 ```sh
+rm -rf ./src/compose.lock && \
 cp ./src/.env.example ./src/.env && \
 docker-compose build --no-cache --force-rm && \
 docker-compose up -d && \
@@ -9,7 +10,6 @@ docker-compose exec php composer install && \
 docker-compose exec php php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider" && \
 docker-compose exec php php artisan key:generate && \
 docker-compose exec php php artisan migrate:refresh && \
-docker-compose exec php php artisan db:seed && \
 docker-compose exec node npm install
 ```
 
