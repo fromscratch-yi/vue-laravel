@@ -1,7 +1,7 @@
 ### build
 Copy all this command and exec on terminal
 ```sh
-cp ./src/.env.example ./src/.env && \
+cp ./src/backend/.env.example ./src/backend/.env && \
 docker-compose build --no-cache --force-rm && \
 docker-compose up -d && \
 docker-compose exec php composer self-update && \
