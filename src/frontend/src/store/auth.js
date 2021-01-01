@@ -18,30 +18,28 @@ const mutations = {
     state.user = user
   },
   setToken (state, token) {
+    console.log(token)
     window.localStorage.setItem('token', token)
   }
 }
 
 const actions = {
-  register (context, data) {
-    axios.post(BASE_URL + '/api/register', data).then((result) => {
+  async register (context, data) {
+    await axios.post(BASE_URL + '/api/register', data).then((result) => {
+      console.log(result)
       context.commit('setUser', result.data.user)
       context.commit('setToken', result.data.token)
-    }).catch(error => {
-      console.log(`Error! HTTP Status: ${error}`)
     })
   },
-  login (context, data) {
-    axios.post(BASE_URL + '/api/login', data).then((result) => {
+  async login (context, data) {
+    await axios.post(BASE_URL + '/api/login', data).then((result) => {
       context.commit('setUser', result.data.user)
       context.commit('setToken', result.data.token)
-    }).catch(error => {
-      console.log(`Error! HTTP Status: ${error}`)
     })
   },
-  logout (context) {
+  async logout (context) {
     console.log(state.token)
-    axios.post(BASE_URL + '/api/logout', null, {
+    await axios.post(BASE_URL + '/api/logout', null, {
       headers: {
         Authorization: `Bearer ${state.token}`
       },
@@ -54,16 +52,14 @@ const actions = {
       console.log(`Error! HTTP Status: ${error}`)
     })
   },
-  fetchUser (context) {
-    axios.get(BASE_URL + '/api/user', {
+  async fetchUser (context) {
+    await axios.get(BASE_URL + '/api/user', {
       headers: {
         Authorization: `Bearer ${state.token}`
       },
       data: {}
     }).then((result) => {
       context.commit('setUser', result.data.user)
-    }).catch(error => {
-      console.log(`Error! HTTP Status: ${error}`)
     })
   }
 }

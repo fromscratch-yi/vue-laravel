@@ -34,7 +34,17 @@ export default {
     const token = this.$store.getters['auth/token']
     const user = this.$store.getters['auth/user']
     if (token && !user) {
-      this.$store.dispatch('auth/fetchUser')
+      this.$store.dispatch('auth/fetchUser').catch(() => {
+        window.localStorage.removeItem('token', null)
+        this.$router.push({
+          name: 'login'
+        })
+      })
+    } else if (!token && !user) {
+      window.localStorage.removeItem('token', null)
+      this.$router.push({
+        name: 'login'
+      })
     }
   }
 }
